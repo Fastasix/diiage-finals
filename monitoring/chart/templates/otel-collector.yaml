@@ -3,6 +3,7 @@ kind: OpenTelemetryCollector
 metadata:
   name: otel-collector
 spec:
+  image: otel/opentelemetry-collector-contrib:0.96.0
   mode: deployment
   config:
     receivers:
