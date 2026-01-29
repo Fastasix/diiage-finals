@@ -1,35 +1,35 @@
-# apiVersion: opentelemetry.io/v1beta1
-# kind: OpenTelemetryCollector
-# metadata:
-#   name: otel-collector
-# spec:
-#   image: otel/opentelemetry-collector-contrib:0.96.0
-#   mode: deployment
-#   config:
-#     receivers:
-#       otlp:
-#         protocols:
-#           grpc:
-#           http:
+apiVersion: opentelemetry.io/v1beta1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel-collector
+spec:
+  image: otel/opentelemetry-collector-contrib:0.96.0
+  mode: deployment
+  config:
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
 
-#     processors:
-#       batch:
+    processors:
+      batch:
 
-#     exporters:
-#       prometheus:
-#         endpoint: "0.0.0.0:8889"
-#       otlp/tempo:
-#         endpoint: monitoring-tempo:4317
-#         tls:
-#           insecure: true
+    exporters:
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+      otlp/tempo:
+        endpoint: monitoring-tempo:4317
+        tls:
+          insecure: true
 
-#     service:
-#       pipelines:
-#         metrics:
-#           receivers: [otlp]
-#           processors: [batch]
-#           exporters: [prometheus]
-#         traces:
-#           receivers: [otlp]
-#           processors: [batch]
-#           exporters: [otlp/tempo]
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [prometheus]
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp/tempo]
